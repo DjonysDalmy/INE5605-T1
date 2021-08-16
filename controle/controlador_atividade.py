@@ -1,5 +1,6 @@
 from limite.tela_atividade import TelaAtividade
 from entidade.atividade import Atividade
+from datetime import date
 
 class ControladorAtividade():
 
@@ -14,10 +15,23 @@ class ControladorAtividade():
     self.__atividade.append(atividade)
 
   def visualizar_atividade(self):
-      print('a')
+    for atividade in self.__atividade:
+      self.__tela_atividade.mostra_atividade({"titulo": atividade.titulo,"descricao": atividade.descricao,"prazo": atividade.prazo,"data_entregue": atividade.data_entregue,"entregue": atividade.entregue,"nota": atividade.nota})
 
   def operacoes_atividade(self):
-      print('a')
+    i = 0
+    for atividade in self.__atividade:
+      self.__tela_atividade.lista_atividade({"opcao": str(i) + ' - ' + atividade.titulo})
+      i += 1
+    atividade = self.__atividade[self.__tela_atividade.seleciona_atividade()]
+    opcao = self.__tela_atividade.opcoes_atividade()
+    if opcao == 1:
+      self.__atividade.remove(atividade)
+    elif opcao == 2:
+      atividade.entregue = True
+      atividade.data_entregue = date.today().strftime("%d/%m/%Y")
+    elif opcao == 3:
+      atividade.nota = self.__tela_atividade.corrigir()
 
   def retornar(self):
     self.__controlador_sistema.abre_tela()

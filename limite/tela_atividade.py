@@ -19,5 +19,31 @@ class TelaAtividade():
     return {"titulo": titulo, "descricao": descricao, "prazo": prazo}
 
   def mostra_atividade(self, dados_atividade):
-    print("NOME DO CURSO: ", dados_atividade["nome"])
+    print("TÍTULO: ", dados_atividade["titulo"])
+    print("DESCRIÇÃO: ", dados_atividade["descricao"])
+    print("PRAZO: ", dados_atividade["prazo"])
+    if dados_atividade["entregue"]:
+        print("DATA DE ENTREGA: ", dados_atividade["data_entregue"])
+        print("NOTA: ", dados_atividade["nota"])
     print("\n")
+
+  def lista_atividade(self, dados_atividade):
+    print(dados_atividade["opcao"])
+
+  def seleciona_atividade(self):
+    atividade = int(input("Atividade: "))
+    return atividade
+
+  def opcoes_atividade(self):
+    print("-------- ATIVIDADE ----------")
+    print("Escolha a opcao")
+    print("1 - Excluir")
+    print("2 - Entregar")
+    print("3 - Corrigir")
+    opcao = int(input("Escolha a opcao: "))
+    return opcao
+
+  def corrigir(self):
+    nota = int(input("Dê uma nota: "))
+    return nota
+
