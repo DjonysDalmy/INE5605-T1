@@ -1,11 +1,13 @@
 from limite.tela_sistema import TelaSistema
 from controle.controlador_curso import ControladorCurso
+from controle.controlador_atividade import ControladorAtividade
 
 class ControladorSistema:
 
     def __init__(self):
         self.__tela_sistema = TelaSistema()
         self.__controlador_curso = ControladorCurso(self)
+        self.__controlador_atividade = ControladorAtividade(self)
 
     def inicializa_sistema(self):
         self.abre_tela()
@@ -23,7 +25,7 @@ class ControladorSistema:
         print('c')
 
     def atividade(self):
-        print('d')
+        self.__controlador_atividade.abre_tela()
 
     def encerra_sistema(self):
         exit(0)
