@@ -3,6 +3,7 @@ from controle.controlador_curso import ControladorCurso
 from controle.controlador_disciplina import ControladorDisciplina
 from controle.controlador_professor import ControladorProfessor
 from controle.controlador_aluno import ControladorAluno
+from controle.controlador_atividade import ControladorAtividade
 
 class ControladorSistema:
 
@@ -12,6 +13,7 @@ class ControladorSistema:
         self.__controlador_disciplina = ControladorDisciplina(self)
         self.__controlador_professor = ControladorProfessor(self)
         self.__controlador_aluno= ControladorAluno(self)
+        self.__controlador_atividade = ControladorAtividade(self)
 
     def inicializa_sistema(self):
         self.abre_tela()
@@ -29,7 +31,7 @@ class ControladorSistema:
         self.__controlador_aluno.abre_tela()
 
     def atividade(self):
-        print('d')
+        self.__controlador_atividade.abre_tela()
 
     def encerra_sistema(self):
         exit(0)
