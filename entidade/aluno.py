@@ -1,10 +1,10 @@
-from atividade import Atividade
+from entidade.atividade import Atividade
 
 class Aluno:
-  def __init__(self, nome: str, idade: int):
+  def __init__(self, nome: str, idade: int, atividade: Atividade):
     self.__nome = nome
     self.__idade = idade
-    self.__atividades = []
+    self.__atividades = atividade
 
   @property
   def nome(self):
@@ -22,12 +22,16 @@ class Aluno:
   def idade(self, idade: int):
     self.__idade = idade
 
-  @atividades.setter
+  @property
+  def atividade(self):
+    return self.__atividade
+
+  @atividade.setter
   def incluir_atividade(self, atividade: Atividade):
     if atividade not in self.__atividades:
         self.__atividades.append(atividade)
     
   @property
-    def listar_atividades(self):
-        for atividade in self.__atividades:
-          print(atividade.nome)
+  def listar_atividades(self):
+    for atividade in self.__atividades:
+      print(atividade.nome)

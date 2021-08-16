@@ -1,5 +1,5 @@
 from limite.tela_aluno import TelaAluno
-from limite.tela_atividades import TelaAtividade
+from limite.tela_atividade import TelaAtividade
 from limite.tela_disciplina import TelaDisciplina
 from entidade.aluno import Aluno
 from entidade.disciplina import Disciplina
@@ -25,9 +25,9 @@ class ControladorDisciplina():
     index = 1
     nome_disciplina = self.__tela_disciplina.pega_nome_disciplina()
     disciplinas = listar_disciplinas()
-    for d in self.disciplinas 
-        if (nome_disciplina == d.nome)
-        Disciplina.listar_alunos(d)
+    for d in self.disciplinas:
+        if (nome_disciplina == d.nome):
+          Disciplina.listar_alunos(d)
     
   def retornar(self):
     self.__controlador_sistema.abre_tela()

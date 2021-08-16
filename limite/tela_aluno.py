@@ -11,13 +11,13 @@ class TelaAluno():
     opcao = int(input("Escolha a opcao: "))
     return opcao
 
- def pega_dados_aluno(self):
-    print("-------- DADOS ALUNO ----------")
-    nome = input("Nome: ")
-    idade = input("Idade: ")
-    return {"nome": nome, "idade": idade}
+def pega_dados_aluno(self):
+  print("-------- DADOS ALUNO ----------")
+  nome = input("Nome: ")
+  idade = input("Idade: ")
+  return {"nome": nome, "idade": idade}
 
-  def pega_nome_aluno(self):
-    print("-------- NOME ALUNO ----------")
-    nome = input("Nome: ")
-    return nome
+def pega_nome_aluno(self):
+  print("-------- NOME ALUNO ----------")
+  nome = input("Nome: ")
+  return nome

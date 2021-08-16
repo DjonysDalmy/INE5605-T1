@@ -1,5 +1,5 @@
 from limite.tela_aluno import TelaAluno
-from limite.tela_atividades import TelaAtividade
+from limite.tela_atividade import TelaAtividade
 from entidade.aluno import Aluno
 
 class ControladorAluno():
@@ -22,8 +22,8 @@ class ControladorAluno():
   def listar_minhas_disciplinas(self, disciplinas):
     index = 1
     nome_aluno = self.__tela_aluno.pega_nome_aluno()
-    for disciplina in disciplinas 
-        if (nome_aluno in disciplina.alunos)
+    for disciplina in disciplinas:
+      if (nome_aluno in disciplina.alunos):
         print(index + "- "+ disciplina.nome)
         index += 1
 

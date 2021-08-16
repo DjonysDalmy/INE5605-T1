@@ -1,4 +1,4 @@
-class TelaAluno():
+class TelaDisciplina():
   def tela_opcoes(self):
     print("-------- DISCIPLINA ----------")
     print("Escolha a opcao")
@@ -9,8 +9,8 @@ class TelaAluno():
 
     opcao = int(input("Escolha a opcao: "))
     return opcao
-
- def pega_dados_disciplina(self):
+    
+  def pega_dados_disciplina(self):
     print("-------- DADOS DISCIPLINA ----------")
     nome = input("Nome: ")
     limite_alunos = input("Limite alunos: ")

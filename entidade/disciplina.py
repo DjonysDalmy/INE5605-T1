@@ -1,4 +1,4 @@
-from aluno import Aluno
+from entidade.aluno import Aluno
 
 class Disciplina:
   def __init__(self, responsavel: str, limite_alunos: int):
@@ -18,15 +18,15 @@ class Disciplina:
   def limite_alunos(self):
     return self.__limite_alunos
 
-  @__limite_alunos.setter
+  @limite_alunos.setter
   def limite_alunos(self, limite_alunos: int):
     self.__limite_alunos = limite_alunos
 
   @property
-    def listar_alunos(self):
-        return self.__alunos
+  def listar_alunos(self):
+    return self.__alunos
 
-  @alunos.setter
+  @listar_alunos.setter
   def incluir_aluno(self, aluno: Aluno):
     if aluno not in self.__alunos:
         self.__alunos.append(aluno)

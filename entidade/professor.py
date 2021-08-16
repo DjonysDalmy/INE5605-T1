@@ -1,4 +1,4 @@
-from disciplina import Disciplina
+from entidade.disciplina import Disciplina
 
 class Professor:
   def __init__(self, nome: str, idade: int):
@@ -21,6 +21,10 @@ class Professor:
   @idade.setter
   def idade(self, idade: int):
     self.__idade = idade
+
+  @property
+  def disciplinas(self):
+    return self.__disciplinas
  
   @disciplinas.setter
   def incluir_disciplina(self, disciplina: Disciplina):
@@ -28,5 +32,5 @@ class Professor:
         self.__disciplinas.append(disciplina)
 
   @property
-    def listar_disciplinas(self):
-        return self.__disciplinas
+  def listar_disciplinas(self):
+    return self.__disciplinas

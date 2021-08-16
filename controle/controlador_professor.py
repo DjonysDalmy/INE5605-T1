@@ -1,5 +1,5 @@
 from limite.tela_professor import TelaProfessor
-from limite.tela_atividades import TelaAtividade
+from limite.tela_atividade import TelaAtividade
 from entidade.professor import Professor
 
 class ControladorProfessor():
@@ -28,7 +28,7 @@ class ControladorProfessor():
   def listar_minhas_disciplinas(self, disciplinas, nome):
     index = 1
     for disciplina in disciplinas:
-        if (disciplina.regente === nome):
+        if (disciplina.regente == nome):
             print(index + "- "+ disciplina.nome)
             index += 1
 
