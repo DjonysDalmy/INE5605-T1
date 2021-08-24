@@ -1,18 +1,27 @@
 from entidade.aluno import Aluno
 
 class Disciplina:
-  def __init__(self, responsavel: str, limite_alunos: int):
+  def __init__(self, nome: str, limite_alunos: int):
     self.__alunos = []
+    self.__nome = nome
     self.__limite_alunos = limite_alunos
-    self.__responsavel = responsavel
+    self.__responsaveis = []
     
   @property
-  def responsavel(self):
-    return self.__responsavel
+  def responsaveis(self):
+    return self.__responsaveis
 
-  @responsavel.setter
-  def responsavel(self, responsavel: str):
-    self.__responsavel = responsavel
+  @responsaveis.setter
+  def responsavel(self, responsavel):
+    self.__responsaveis.append(responsavel)
+
+  @property
+  def nome(self):
+    return self.__nome
+
+  @nome.setter
+  def nome(self, nome: str):
+    self.__nome = nome
 
   @property
   def limite_alunos(self):
