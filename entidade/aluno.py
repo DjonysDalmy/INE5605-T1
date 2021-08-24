@@ -1,10 +1,10 @@
 from entidade.atividade import Atividade
 
 class Aluno:
-  def __init__(self, nome: str, idade: int, atividade: Atividade):
+  def __init__(self, nome: str, idade: int):
     self.__nome = nome
     self.__idade = idade
-    self.__atividades = atividade
+    self.__atividades = []
 
   @property
   def nome(self):
