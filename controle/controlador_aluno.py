@@ -13,8 +13,8 @@ class ControladorAluno():
 
   def cadastrar_aluno(self):
     dados_aluno = self.__tela_aluno.pega_dados_aluno()
-    alunoJahCriado = dados_aluno["nome"] in self.__alunos
-    if (alunoJahCriado):
+    aluno_ja_criado = dados_aluno["nome"] in self.__alunos
+    if (aluno_ja_criado):
       print("Aluno já criado")
     else: 
       aluno = Aluno(dados_aluno["nome"], dados_aluno["idade"])
