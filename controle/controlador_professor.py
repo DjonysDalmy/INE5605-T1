@@ -14,9 +14,13 @@ class ControladorProfessor():
 
   def cadastrar_professor(self):
     dados_professor = self.__tela_professor.pega_dados_professor()
-    professor = Professor(dados_professor["nome"], dados_professor["idade"])
-    self.__professores.append(professor)
-
+    professor_ja_criado = dados_professor["nome"] in self.__professores
+    if (professor_ja_criado):
+      print("Professor já criado")
+    else: 
+      professor = Professor(dados_professor["nome"], dados_professor["idade"])
+      self.__professores.append(professor)
+     
   def operacoes_professor(self):
     i = 0
     for professor in self.__professores:
