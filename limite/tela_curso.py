@@ -3,7 +3,8 @@ class TelaCurso():
     print("-------- CURSO ----------")
     print("Escolha a opcao")
     print("1 - Cadastrar Curso")
-    print("2 - Relatório do curso")
+    print("2 - Operações do curso")
+    print("3 - Relatórios do curso")
     print("0 - Retornar")
 
     opcao = int(input("Escolha a opcao: "))
@@ -12,9 +13,34 @@ class TelaCurso():
   def pega_dados_curso(self):
     print("-------- DADOS CURSO ----------")
     nome = input("Nome: ")
-
     return {"nome": nome}
 
   def mostra_curso(self, dados_curso):
     print("NOME DO CURSO: ", dados_curso["nome"])
     print("\n")
+
+  def seleciona_curso(self):
+    print("-------- QUAL CURSO? ----------")
+    curso = int(input("Curso: "))
+    return curso
+
+  def opcoes_curso(self):
+    print("-------- O QUE DESEJA FAZER? ----------")
+    print("1 - Excluir")
+    print("2 - Editar")
+    opcao = int(input("Escolha a opção: "))
+    return opcao
+
+  def opcoes_editar(self):
+    print("-------- O QUE DESEJA EDITAR? ----------")
+    print("1 - Nome")
+    opcao = int(input("Escolha a opção: "))
+    return opcao
+  
+  def novo_campo(self):
+    print("-------- NOVO VALOR ----------")
+    opcao = input("Qual o novo nome?: ")
+    return opcao
+
+  def lista_curso(self, dados_curso):
+    print(dados_curso["opcao"])
