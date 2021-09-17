@@ -1,5 +1,6 @@
 from limite.tela_atividade import TelaAtividade
 from entidade.atividade import Atividade
+from controle.controlador_disciplina import ControladorDisciplina
 from datetime import date
 
 class ControladorAtividade():
@@ -10,8 +11,10 @@ class ControladorAtividade():
     self.__controlador_sistema = controlador_sistema
 
   def cadastrar_atividade(self):
+    ControladorDisciplina.listar_disciplinas()
     dados_atividade = self.__tela_atividade.pega_dados_atividade()
-    atividade = Atividade(None, dados_atividade["titulo"], dados_atividade["descricao"], dados_atividade["prazo"], None, False )
+    atividade = Atividade(None, dados_atividade["titulo"], dados_atividade["descricao"], dados_atividade["prazo"], dados_atividade["disciplina"], None, False )
+
     self.__atividade.append(atividade)
 
   def visualizar_atividade(self):

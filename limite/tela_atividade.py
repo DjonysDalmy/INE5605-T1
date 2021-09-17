@@ -10,13 +10,13 @@ class TelaAtividade():
     opcao = int(input("Escolha a opcao: "))
     return opcao
 
-  def pega_dados_atividade(self):
+  def pega_dados_atividade(self, oi):
     print("-------- DADOS CURSO ----------")
     titulo = input("Título: ")
     descricao = input("Descrição: ")
     prazo = input("Prazo: ")
 
-    return {"titulo": titulo, "descricao": descricao, "prazo": prazo}
+    return {"titulo": titulo, "descricao": descricao, "prazo": prazo, "disciplina": disciplina}
 
   def mostra_atividade(self, dados_atividade):
     print("TÍTULO: ", dados_atividade["titulo"])

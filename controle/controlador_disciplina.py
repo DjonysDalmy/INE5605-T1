@@ -1,5 +1,4 @@
 from limite.tela_disciplina import TelaDisciplina
-from limite.tela_disciplina import TelaDisciplina
 from entidade.disciplina import Disciplina
 
 class ControladorDisciplina():

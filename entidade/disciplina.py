@@ -1,4 +1,5 @@
 from entidade.aluno import Aluno
+from entidade.atividade import Atividade
 
 class Disciplina:
   def __init__(self, nome: str, limite_alunos: int):
@@ -6,6 +7,7 @@ class Disciplina:
     self.__nome = nome
     self.__limite_alunos = limite_alunos
     self.__responsaveis = []
+    self.__atividades = []
     
   @property
   def responsaveis(self):
