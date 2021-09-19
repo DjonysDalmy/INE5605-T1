@@ -1,5 +1,6 @@
 from limite.tela_aluno import TelaAluno
 from entidade.aluno import Aluno
+from exceptions.exc import IndexErradoException, TelaInvalidaException
 
 class ControladorAluno():
 
@@ -39,29 +40,43 @@ class ControladorAluno():
         if escolha == 2:
           novo = self.__tela_aluno.novo_campo(1)
           aluno.idade = novo
+        else:
+          raise IndexErradoException()
+      else:
+        raise IndexErradoException()
     else: 
-      print("Opcão de aluno não existente")
+      raise IndexErradoException()
 
-  def listar_minhas_disciplinas(self, disciplinas):
+  def listar_minhas_disciplinas(self):
     index = 1
+    disciplinas = []
     nome_aluno = self.__tela_aluno.pega_nome_aluno()
     for disciplina in disciplinas:
       if (nome_aluno in disciplina.alunos):
-        print(index + "- "+ disciplina.nome)
+        disciplinas.append(index + "- "+ disciplina.nome)
         index += 1
+    self.__tela_aluno.lista_disciplinas(disciplinas)
 
-  def listar_minhas_atividades(self):
-      nome_aluno = self.__tela_aluno.pega_nome_aluno()
-      for a in self.__alunos:
-        if (a.nome == nome_aluno):
-            Aluno.listar_atividades(a)
+  def listar_atividades(self):
+    nome_aluno = self.__tela_aluno.pega_nome_aluno()
+    for a in self.__alunos:
+      if (a.nome == nome_aluno):
+        atividades = Aluno.listar_atividades(a)
+        self.__tela_aluno.lista_atividades(atividades)
     
   def retornar(self):
+    self.__tela_aluno.close()
     self.__controlador_sistema.abre_tela()
-
+ 
   def abre_tela(self):
-    lista_opcoes = {1: self.cadastrar_aluno, 2: self.operacoes_aluno, 3: self.listar_minhas_disciplinas, 4: self.listar_minhas_atividades, 0: self.retornar}
+    lista_opcoes = {1: self.cadastrar_aluno, 2: self.operacoes_aluno, 3: self.listar_minhas_disciplinas, 4: self.listar_atividades, 0: self.retornar}
 
     continua = True
     while continua:
-      lista_opcoes[self.__tela_aluno.tela_opcoes()]()
+      opcao_escolhida = self.__tela_aluno.open()   
+      num = int(opcao_escolhida[1][0])
+      try:
+        funcao_escolhida = lista_opcoes[num]
+        funcao_escolhida() 
+      except:
+        raise TelaInvalidaException()

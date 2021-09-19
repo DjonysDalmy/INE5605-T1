@@ -1,6 +1,8 @@
+from entidade import disciplina
 from limite.tela_professor import TelaProfessor
-from limite.tela_atividade import TelaAtividade
+from controle.controlador_disciplina import ControladorDisciplina
 from entidade.professor import Professor
+from exceptions.exc import IndexErradoException, TelaInvalidaException
 
 class ControladorProfessor():
 
@@ -40,22 +42,45 @@ class ControladorProfessor():
         if escolha == 2:
           novo = self.__tela_professor.novo_campo(1)
           professor.idade = novo
+        else: 
+          raise IndexErradoException()
+      else: 
+        raise IndexErradoException()
     else: 
-      print("Opcão de professor não existente")
+      raise IndexErradoException()
 
-  def listar_minhas_disciplinas(self, disciplinas, nome):
-    index = 1
-    for disciplina in disciplinas:
-        if (disciplina.regente == nome):
-            print(index + "- "+ disciplina.nome)
-            index += 1
+  def listar_minhas_disciplinas(self):
+    nome_professor = self.__tela_professor.pega_nome_professor()
+    for d in self.__professores:
+      if (d.nome == nome_professor):
+        disciplinas = Professor.listar_disciplinas(d)
+        self.__tela_professor.lista_disciplinas(disciplinas)
+
+  def vincular_disciplina(self):
+    i = 0
+    for professor in self.__professores:
+      self.__tela_professor.lista_professor({"opcao": str(i) + ' - ' + professor.nome})
+      i += 1
+    escolhido = self.__tela_professor.seleciona_professor()
+    if (self.index_em_professor(escolhido)):
+      disciplinas = ControladorDisciplina.listar_disciplinas()
+      disciplina = self.__tela_professor.vincular_disciplina(disciplinas)
+      print(disciplina, 'teste')
+      Professor.incluir_disciplina(disciplina)
 
   def retornar(self):
+    self.__tela_professor.close()
     self.__controlador_sistema.abre_tela()
 
   def abre_tela(self):
-    lista_opcoes = {1: self.cadastrar_professor, 2: self.operacoes_professor, 3: self.listar_minhas_disciplinas, 0: self.retornar}
+    lista_opcoes = {1: self.cadastrar_professor, 2: self.operacoes_professor, 3: self.listar_minhas_disciplinas, 4: self.vincular_disciplina, 0: self.retornar}
 
     continua = True
     while continua:
-      lista_opcoes[self.__tela_professor.tela_opcoes()]()
+      opcao_escolhida = self.__tela_professor.open()   
+      num = int(opcao_escolhida[1][0])
+      try:
+        funcao_escolhida = lista_opcoes[num]
+        funcao_escolhida() 
+      except:
+        raise TelaInvalidaException()

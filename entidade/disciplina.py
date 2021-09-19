@@ -41,3 +41,10 @@ class Disciplina:
   def incluir_aluno(self, aluno: Aluno):
     if aluno not in self.__alunos:
         self.__alunos.append(aluno)
+    
+  def listar_atividades(self):
+    return self.__atividades
+
+  def incluir_atividade(self, atividade: Atividade):
+    if atividade not in self.__atividades:
+        self.__atividades.append(atividade)

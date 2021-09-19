@@ -15,7 +15,6 @@ class Aluno(Pessoa):
     if atividade not in self.__atividades:
         self.__atividades.append(atividade)
     
-  @property
   def listar_atividades(self):
     for atividade in self.__atividades:
-      print(atividade.nome)
+      return atividade.nome

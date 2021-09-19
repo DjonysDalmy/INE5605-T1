@@ -1,5 +1,6 @@
 from limite.tela_curso import TelaCurso
 from entidade.curso import Curso
+from exceptions.exc import IndexErradoException, TelaInvalidaException
 from entidade.cursoDAO import CursoDAO
 
 class ControladorCurso():
@@ -21,27 +22,38 @@ class ControladorCurso():
       self.__curso.add(Curso(dados_curso["nome"], dados_curso["instituicao"]))
     
   def operacoes_curso(self):
-    cursos = []
-    for curso in self.__curso.get_all():
-      self.__tela_curso.lista_curso({"opcao": str(len(cursos)) + ' - ' + curso.nome})
-      cursos.append(curso.nome)
-    escolhido = cursos[self.__tela_curso.seleciona_curso()]
-
-    opcao = self.__tela_curso.opcoes_curso()
-    if opcao == 1:
-      self.__curso.remove(escolhido)
-    elif opcao == 2:
-      escolha = self.__tela_curso.opcoes_editar()
-      if escolha == 1:
-        curso.nome = self.__tela_curso.novo_campo()
-      if escolha == 2:
-        curso.instituicao = self.__tela_curso.novo_campo()
+    i = 0
+    for curso in self.__cursos:
+      self.__tela_curso.lista_curso({"opcao": str(i) + ' - ' + curso.nome})
+      i += 1
+    escolhido = self.__tela_curso.seleciona_curso()
+    if (self.index_em_curso(escolhido)):
+      curso = self.__cursos[escolhido]
+      opcao = self.__tela_curso.opcoes_curso()
+      if opcao == 1:
+        self.__cursos.remove(curso)
+      elif opcao == 2:
+        escolha = self.__tela_curso.opcoes_editar()
+        if escolha == 1:
+          curso.nome = self.__tela_curso.novo_campo(1)
+        if escolha == 2:
+          curso.instituicao = self.__tela_curso.novo_campo(2)
+        else: 
+          raise IndexErradoException()
+      else: 
+        raise IndexErradoException()
+    else: 
+      raise IndexErradoException()
 
   def relatorio_curso(self):
-    for curso in self.__curso.get_all():
-      self.__tela_curso.mostra_curso({"nome": curso.nome,"instituicao": curso.instituicao })
+    i = 0
+    for curso in self.__cursos:
+      self.__tela_curso.lista_curso({"opcao": str(i) + ' - ' + curso.nome})
+      i += 1
+    self.__tela_curso.relatorio_curso()
 
   def retornar(self):
+    self.__tela_curso.close()
     self.__controlador_sistema.abre_tela()
 
   def abre_tela(self):
@@ -49,4 +61,10 @@ class ControladorCurso():
 
     continua = True
     while continua:
-      lista_opcoes[self.__tela_curso.tela_opcoes()]()
+      opcao_escolhida = self.__tela_curso.open()   
+      num = int(opcao_escolhida[1][0])
+      try:
+        funcao_escolhida = lista_opcoes[num]
+        funcao_escolhida() 
+      except:
+        raise TelaInvalidaException()
