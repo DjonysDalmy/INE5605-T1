@@ -26,11 +26,9 @@ class Professor:
   def disciplinas(self):
     return self.__disciplinas
  
-  @disciplinas.setter
   def incluir_disciplina(self, disciplina: Disciplina):
     if disciplina not in self.__disciplinas:
         self.__disciplinas.append(disciplina)
 
-  @property
   def listar_disciplinas(self):
     return self.__disciplinas

@@ -1,5 +1,6 @@
 from limite.tela_curso import TelaCurso
 from entidade.curso import Curso
+from exceptions.exc import IndexErradoException, TelaInvalidaException
 
 class ControladorCurso():
 
@@ -23,9 +24,11 @@ class ControladorCurso():
   def operacoes_curso(self):
     i = 0
     for curso in self.__cursos:
+      print(curso.nome)
       self.__tela_curso.lista_curso({"opcao": str(i) + ' - ' + curso.nome})
       i += 1
     escolhido = self.__tela_curso.seleciona_curso()
+    print(escolhido)
     if (self.index_em_curso(escolhido)):
       curso = self.__cursos[escolhido]
       opcao = self.__tela_curso.opcoes_curso()
@@ -35,14 +38,22 @@ class ControladorCurso():
         escolha = self.__tela_curso.opcoes_editar()
         if escolha == 1:
           curso.nome = self.__tela_curso.novo_campo()
+        else: 
+          raise IndexErradoException()
+      else: 
+        raise IndexErradoException()
     else: 
-      print("Opcão de curso não existente")
+      raise IndexErradoException()
 
   def relatorio_curso(self):
+    i = 0
     for curso in self.__cursos:
-      self.__tela_curso.mostra_curso({"nome": curso.nome,})
+      self.__tela_curso.lista_curso({"opcao": str(i) + ' - ' + curso.nome})
+      i += 1
+    self.__tela_curso.relatorio_curso()
 
   def retornar(self):
+    self.__tela_curso.close()
     self.__controlador_sistema.abre_tela()
 
   def abre_tela(self):
@@ -50,4 +61,10 @@ class ControladorCurso():
 
     continua = True
     while continua:
-      lista_opcoes[self.__tela_curso.tela_opcoes()]()
+      opcao_escolhida = self.__tela_curso.open()   
+      num = int(opcao_escolhida[1][0])
+      try:
+        funcao_escolhida = lista_opcoes[num]
+        funcao_escolhida() 
+      except:
+        raise TelaInvalidaException()
