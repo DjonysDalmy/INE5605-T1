@@ -1,6 +1,7 @@
 from limite.tela_curso import TelaCurso
 from entidade.curso import Curso
 from exceptions.exc import IndexErradoException, TelaInvalidaException
+from entidade.cursoDAO import CursoDAO
 
 class ControladorCurso():
 
@@ -8,27 +9,24 @@ class ControladorCurso():
     self.__cursos = []
     self.__tela_curso = TelaCurso()
     self.__controlador_sistema = controlador_sistema
+    self.__curso = CursoDAO()
 
   def index_em_curso(self, index):
-    return index < len(self.__cursos)
+    return index < len(self.__curso.get_all())
 
   def cadastrar_curso(self):
     dados_curso = self.__tela_curso.pega_dados_curso()
-    curso_ja_criado = dados_curso["nome"] in self.__cursos
-    if (curso_ja_criado):
+    if (dados_curso["nome"] in self.__cursos):
       print("Curso já criado")
-    else: 
-      curso = Curso(dados_curso["nome"])
-      self.__cursos.append(curso)
+    else:
+      self.__curso.add(Curso(dados_curso["nome"], dados_curso["instituicao"]))
     
   def operacoes_curso(self):
     i = 0
     for curso in self.__cursos:
-      print(curso.nome)
       self.__tela_curso.lista_curso({"opcao": str(i) + ' - ' + curso.nome})
       i += 1
     escolhido = self.__tela_curso.seleciona_curso()
-    print(escolhido)
     if (self.index_em_curso(escolhido)):
       curso = self.__cursos[escolhido]
       opcao = self.__tela_curso.opcoes_curso()
@@ -37,7 +35,9 @@ class ControladorCurso():
       elif opcao == 2:
         escolha = self.__tela_curso.opcoes_editar()
         if escolha == 1:
-          curso.nome = self.__tela_curso.novo_campo()
+          curso.nome = self.__tela_curso.novo_campo(1)
+        if escolha == 2:
+          curso.instituicao = self.__tela_curso.novo_campo(2)
         else: 
           raise IndexErradoException()
       else: 

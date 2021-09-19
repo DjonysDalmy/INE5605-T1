@@ -27,6 +27,7 @@ class TelaCurso():
     layout = [
       [sg.Text('Escolha o nome do curso:')],
       [sg.Text('Nome do curso:', size=(15, 1)), sg.InputText("", key="nome")],
+      [sg.Text('Nome da instituição: ', size=(15, 1)), sg.InputText("", key="instituicao")],
       [sg.Submit()]
     ]
     self.__window = sg.Window('Criar curso').Layout(layout)
@@ -86,6 +87,7 @@ class TelaCurso():
     layout = [
       [sg.Text('O que deseja editar:')],
       [sg.Text('1 - Nome', size=(15, 1))],
+      [sg.Text('2 - Instituição', size=(15, 1))],
       [sg.Text('Qual opção:', size=(15, 1)), sg.InputText(key="opcao")],
       [sg.Submit()]
     ]
@@ -95,16 +97,27 @@ class TelaCurso():
     self.__window.Close()
     return int(num['opcao'])
   
-  def novo_campo(self):
-    layout = [
-      [sg.Text('Qual o novo nome:', size=(15, 1)), sg.InputText(key="opcao")],
-      [sg.Submit()]
-    ]
-    self.__window = sg.Window('Novo nome').Layout(layout)
-    values = self.__window.Read()
-    valor = values[1]
-    self.__window.Close()
-    return valor['opcao']
+  def novo_campo(self, opcao):
+    if (opcao == 1): 
+      layout = [
+        [sg.Text('Qual o novo nome:', size=(15, 1)), sg.InputText(key="opcao")],
+        [sg.Submit()]
+      ]
+      self.__window = sg.Window('Novo nome').Layout(layout)
+      values = self.__window.Read()
+      valor = values[1]
+      self.__window.Close()
+      return valor['opcao']
+    if (opcao == 2): 
+      layout = [
+        [sg.Text('Qual a nova instituição:', size=(15, 1)), sg.InputText(key="opcao")],
+        [sg.Submit()]
+      ]
+      self.__window = sg.Window('Nova instituição').Layout(layout)
+      values = self.__window.Read()
+      valor = values[1]
+      self.__window.Close()
+      return valor['opcao']
 
   def lista_curso(self, dados_curso):
     self.__cursos.append(dados_curso["opcao"])
