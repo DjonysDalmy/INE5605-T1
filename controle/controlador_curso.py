@@ -1,5 +1,6 @@
 from limite.tela_curso import TelaCurso
 from entidade.curso import Curso
+from entidade.cursoDAO import CursoDAO
 
 class ControladorCurso():
 
@@ -7,40 +8,38 @@ class ControladorCurso():
     self.__cursos = []
     self.__tela_curso = TelaCurso()
     self.__controlador_sistema = controlador_sistema
+    self.__curso = CursoDAO()
 
   def index_em_curso(self, index):
-    return index < len(self.__cursos)
+    return index < len(self.__curso.get_all())
 
   def cadastrar_curso(self):
     dados_curso = self.__tela_curso.pega_dados_curso()
-    curso_ja_criado = dados_curso["nome"] in self.__cursos
-    if (curso_ja_criado):
+    if (dados_curso["nome"] in self.__cursos):
       print("Curso já criado")
-    else: 
-      curso = Curso(dados_curso["nome"])
-      self.__cursos.append(curso)
+    else:
+      self.__curso.add(Curso(dados_curso["nome"], dados_curso["instituicao"]))
     
   def operacoes_curso(self):
-    i = 0
-    for curso in self.__cursos:
-      self.__tela_curso.lista_curso({"opcao": str(i) + ' - ' + curso.nome})
-      i += 1
-    escolhido = self.__tela_curso.seleciona_curso()
-    if (self.index_em_curso(escolhido)):
-      curso = self.__cursos[escolhido]
-      opcao = self.__tela_curso.opcoes_curso()
-      if opcao == 1:
-        self.__cursos.remove(curso)
-      elif opcao == 2:
-        escolha = self.__tela_curso.opcoes_editar()
-        if escolha == 1:
-          curso.nome = self.__tela_curso.novo_campo()
-    else: 
-      print("Opcão de curso não existente")
+    cursos = []
+    for curso in self.__curso.get_all():
+      self.__tela_curso.lista_curso({"opcao": str(len(cursos)) + ' - ' + curso.nome})
+      cursos.append(curso.nome)
+    escolhido = cursos[self.__tela_curso.seleciona_curso()]
+
+    opcao = self.__tela_curso.opcoes_curso()
+    if opcao == 1:
+      self.__curso.remove(escolhido)
+    elif opcao == 2:
+      escolha = self.__tela_curso.opcoes_editar()
+      if escolha == 1:
+        curso.nome = self.__tela_curso.novo_campo()
+      if escolha == 2:
+        curso.instituicao = self.__tela_curso.novo_campo()
 
   def relatorio_curso(self):
-    for curso in self.__cursos:
-      self.__tela_curso.mostra_curso({"nome": curso.nome,})
+    for curso in self.__curso.get_all():
+      self.__tela_curso.mostra_curso({"nome": curso.nome,"instituicao": curso.instituicao })
 
   def retornar(self):
     self.__controlador_sistema.abre_tela()

@@ -13,10 +13,12 @@ class TelaCurso():
   def pega_dados_curso(self):
     print("-------- DADOS CURSO ----------")
     nome = input("Nome: ")
-    return {"nome": nome}
+    instituicao = input("Instituição: ")
+    return {"nome": nome, "instituicao": instituicao}
 
   def mostra_curso(self, dados_curso):
     print("NOME DO CURSO: ", dados_curso["nome"])
+    print("INSTITUIÇÃO: ", dados_curso["instituicao"])
     print("\n")
 
   def seleciona_curso(self):
@@ -34,12 +36,13 @@ class TelaCurso():
   def opcoes_editar(self):
     print("-------- O QUE DESEJA EDITAR? ----------")
     print("1 - Nome")
+    print("2 - Instituição")
     opcao = int(input("Escolha a opção: "))
     return opcao
   
   def novo_campo(self):
     print("-------- NOVO VALOR ----------")
-    opcao = input("Qual o novo nome?: ")
+    opcao = input("Qual o novo valor?: ")
     return opcao
 
   def lista_curso(self, dados_curso):
