@@ -38,7 +38,7 @@ class ControladorCurso():
       opcao = self.__tela_curso.opcoes_curso()
       if opcao == 1:
         self.__cursos.remove(curso)
-        self.__curso.remove(curso)
+        self.__curso.remove(curso.nome)
       elif opcao == 2:
         escolha = self.__tela_curso.opcoes_editar()
         if escolha == 1:
