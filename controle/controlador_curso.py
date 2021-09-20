@@ -10,6 +10,11 @@ class ControladorCurso():
     self.__tela_curso = TelaCurso()
     self.__controlador_sistema = controlador_sistema
     self.__curso = CursoDAO()
+    self.adiciona_cursos_salvos()
+
+  def adiciona_cursos_salvos(self):
+    for curso in self.__curso.get_all():
+      self.__cursos.append(curso)
 
   def index_em_curso(self, index):
     return index < len(self.__curso.get_all())
@@ -32,6 +37,7 @@ class ControladorCurso():
       opcao = self.__tela_curso.opcoes_curso()
       if opcao == 1:
         self.__cursos.remove(curso)
+        self.__curso.remove(curso)
       elif opcao == 2:
         escolha = self.__tela_curso.opcoes_editar()
         if escolha == 1:

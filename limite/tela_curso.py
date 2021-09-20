@@ -64,6 +64,7 @@ class TelaCurso():
       layout.append([sg.Text("Instituição: " + curso.instituicao, size=(20, 1))])
       layout.append([sg.Text("---", size=(20, 1))])
 
+    layout.append([sg.Cancel()])
     self.__window = sg.Window('Tela relatórios').Layout(layout)
     self.__cursos = []
     values = self.__window.Read()
