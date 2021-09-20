@@ -25,6 +25,7 @@ class ControladorCurso():
       print("Curso já criado")
     else:
       self.__curso.add(Curso(dados_curso["nome"], dados_curso["instituicao"]))
+      self.adiciona_cursos_salvos()
     
   def operacoes_curso(self):
     cursos = []
