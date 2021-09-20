@@ -9,7 +9,6 @@ class CursoDAO(DAO):
     if curso is not None and isinstance(curso, Curso) and isinstance(curso.nome, str) and isinstance(curso.instituicao, str):
       super().add(curso.nome, curso)
 
-
   def get(self, key: str):
     if isinstance(key, str):
       return super().get(key)

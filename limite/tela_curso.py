@@ -111,6 +111,7 @@ class TelaCurso():
       valor = values[1]
       self.__window.Close()
       return valor['opcao']
+      
     if (opcao == 2): 
       layout = [
         [sg.Text('Qual a nova instituição:', size=(15, 1)), sg.InputText(key="opcao")],

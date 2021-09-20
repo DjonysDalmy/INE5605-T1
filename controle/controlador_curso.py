@@ -37,14 +37,19 @@ class ControladorCurso():
       curso = self.__cursos[escolhido]
       opcao = self.__tela_curso.opcoes_curso()
       if opcao == 1:
-        self.__cursos.remove(curso)
         self.__curso.remove(curso.nome)
       elif opcao == 2:
         escolha = self.__tela_curso.opcoes_editar()
         if escolha == 1:
-          curso.nome = self.__tela_curso.novo_campo(1)
-        if escolha == 2:
-          curso.instituicao = self.__tela_curso.novo_campo(2)
+          opcao = self.__tela_curso.novo_campo(1)
+          self.__curso.remove(curso.nome)
+          self.__curso.add(Curso(opcao, curso.instituicao))
+
+        elif escolha == 2:
+          opcao = self.__tela_curso.novo_campo(2)
+          self.__curso.remove(curso.nome)
+          self.__curso.add(Curso(curso.nome, opcao))
+          
         else: 
           raise IndexErradoException()
       else: 
