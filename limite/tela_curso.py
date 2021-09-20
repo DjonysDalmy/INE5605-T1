@@ -35,13 +35,15 @@ class TelaCurso():
     self.__window.Close()
     return values[1]
 
-  def seleciona_curso(self):
+  def seleciona_curso(self, cursos):
     self.close()
     layout = [
       [sg.Text('Escolha o curso:', size=(20, 1))]
     ]
-    for curso in self.__cursos:
-      layout.append([sg.Text(curso, size=(20, 1))])
+    i = 0
+    for curso in cursos:
+      layout.append([sg.Text(str(i) + ": " + curso.nome, size=(20, 1))])
+      i +=1
 
     layout.extend([[sg.Text('Qual opção:', size=(15, 1)), sg.InputText(key="opcao")], [sg.Submit()]])
 
@@ -52,15 +54,15 @@ class TelaCurso():
     self.__cursos = []
     return int(num['opcao'])
 
-  def relatorio_curso(self):
+  def relatorio_curso(self, cursos):
     self.close()
     layout = [
       [sg.Text('Lista de cursos:', size=(20, 1))]
     ]
-    for curso in self.__cursos:
-      layout.append([sg.Text(curso, size=(20, 1))])
-
-    layout.append([sg.Cancel()])
+    for curso in cursos:
+      layout.append([sg.Text("Curso: " + curso.nome, size=(20, 1))])
+      layout.append([sg.Text("Instituição: " + curso.instituicao, size=(20, 1))])
+      layout.append([sg.Text("---", size=(20, 1))])
 
     self.__window = sg.Window('Tela relatórios').Layout(layout)
     self.__cursos = []

@@ -22,11 +22,11 @@ class ControladorCurso():
       self.__curso.add(Curso(dados_curso["nome"], dados_curso["instituicao"]))
     
   def operacoes_curso(self):
-    i = 0
-    for curso in self.__cursos:
-      self.__tela_curso.lista_curso({"opcao": str(i) + ' - ' + curso.nome})
-      i += 1
-    escolhido = self.__tela_curso.seleciona_curso()
+    cursos = []
+    for curso in self.__curso.get_all():
+      cursos.append(curso)
+
+    escolhido = self.__tela_curso.seleciona_curso(cursos)
     if (self.index_em_curso(escolhido)):
       curso = self.__cursos[escolhido]
       opcao = self.__tela_curso.opcoes_curso()
@@ -46,11 +46,10 @@ class ControladorCurso():
       raise IndexErradoException()
 
   def relatorio_curso(self):
-    i = 0
-    for curso in self.__cursos:
-      self.__tela_curso.lista_curso({"opcao": str(i) + ' - ' + curso.nome})
-      i += 1
-    self.__tela_curso.relatorio_curso()
+    cursos = []
+    for curso in self.__curso.get_all():
+      cursos.append(curso)
+    self.__tela_curso.relatorio_curso(cursos)
 
   def retornar(self):
     self.__tela_curso.close()
